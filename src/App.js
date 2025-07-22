@@ -1,11 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import NavBar from "./Components/NavBar";
+import SideBar from "./Components/SideBar";
+import MainContent from "./Components/MainContent";
+import UserProfile from "./Components/UserProfile";
 
 function App() {
+
   return (
-    <div className="App">
-      <h1>Welcome on skillsync</h1>
-      <p>Hare Krishna</p>
+    <div>
+      <NavBar/>
+      <div style={{display:'flex'}}></div>
+      <SideBar/>
+      <MainContent/>
+      <UserProfile/>
     </div>
   );
 }
