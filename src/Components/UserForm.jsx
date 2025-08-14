@@ -1,6 +1,15 @@
 import InputField from "./InputField";
-function UserForm({user,handleInputChange}){
-    
+import { useState } from "react";
+function UserForm({user,handleInputChange,handleAddSkill, handleRemoveSkill}){
+
+    const[newSkill,setNewSkill] = useState('');
+    function onAddSkill(){
+        if(newSkill.trim()!=='')
+        {
+            handleAddSkill(newSkill);
+            setNewSkill('');
+        }
+    }
     return(
         <div>
             <h2>Enter your information</h2>
@@ -19,6 +28,43 @@ function UserForm({user,handleInputChange}){
                 rows={4}
                 >
                 </textarea>
+            </div>
+            <div className="mb-4">
+                <label className="block mb-1 font-medium">Skills</label>
+                <div className="flex gap-2">
+                    <input 
+                    placeholder="e.g.,React" 
+                    type="text" name="skills" 
+                    value={newSkill} 
+                    onChange={(e)=>{
+                        setNewSkill(e.target.value);
+                    }}
+                    className="flex-1 px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-white"
+                    ></input>
+                    <button 
+                    type="button" 
+                    onClick={onAddSkill}
+                    className="px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                    >
+                        Add
+                    </button>
+                </div>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-2">
+                {
+                    user.skills.map((skill,index)=>{
+                        return <span key={index} className="bg-indigo-500 text-white text-sm px-2 py-1 rounded-full flex items-center gap-1">
+                            {skill}
+                            <button
+                            type="button"
+                            onClick={() => handleRemoveSkill(index)}
+                            className="ml-1 text-xs text-white hover:text-gray-300"
+                            >
+                                ❌
+                            </button>
+                        </span>
+                    })
+                }
             </div>
         </div>
     )
